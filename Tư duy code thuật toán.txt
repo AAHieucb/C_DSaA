@@ -1,0 +1,30 @@
+# Tư duy code thuật toán:
+-> Cách nghĩ: 
+Đơn giản hóa. Làm theo thứ tự đến đâu chặt đến đó, quay ngược lại nếu cần. K code khi chưa hiểu tường tận vấn đề và cách giải quyết. Giả định các hàm cần có đã có r và viết ra trước sau đó mới định nghĩa hàm. Khi code bài dài thì debug luôn theo thứ tự luồng, k phải có lỗi r mới debug (quan trọng). Giải pháp theo thứ tự lần lượt hay hơn là giải pháp cho toàn cục. Lấy 1 ví dụ cụ thể và viết thỏa mãn.
+
+-> PP vô thức: Ta có pp trong toán hay trong code mà ta thường vô thức sử dụng đó là làm tuần tự và chia tất cả các TH nhanh và liên tục. VD gặp 1 ngã rẽ để ta chia TH, if a>b thì ta phân vân liệu a>b hay a!=b hay a>=b, ta ngay lập tức xét TH a=b thì chuyện gì xảy ra và đào sâu vào TH đó với tốc độ cao và đưa ra quyết định luôn tại thời điểm đó. Code đã viết là phải chắc, k đc viết bừa a>b rồi về sau mới fix lại. Thông thường ta đôi khi phải chia nhiều TH hơn thế, a=b xong lại từ đó chia ra thêm vài TH con trong TH con thì phải nhanh chóng đi sâu vào ngay.
+
+-> Cần nghĩ kỹ hơn khi làm các vòng lặp: nếu nó cứ chạy mãi thì sao, phải đảm bảo điều kiện dừng chắc chắn xảy ra
+
+
+
+# Các dạng cơ bản thường gặp nhất:
+-> Lấy ra phần tử lớn nhất nhỏ nhất: 
+Giả sử ta có 1 mảng, ta đặt biến max,min bằng giá trị dầu tiên của mảng và so sánh từng phần tử như bth, đặt là index nếu cần lấy số thứ tự của phần tử max min của mảng
+
+-> Quy hoạch động:
+- VD fibonacii khi đệ quy f(n)=f(n-1)+f(n-2) thế thì mỗi khi tính như v cái giá trị f(1), f(0),... sẽ được tính đi tính lại dẫn đến chậm -> ta có thể lưu các giá trị đó vào một mảng để tính duy nhất nó một lần.
+Tính f(0)=0;f(1)=1;for(int i=2;i<=10;i++){f(i)=f(i-1)+f(i-2);} là ra 10 số đầu dãy fibonacii đơn giản.
+
+- Tư duy khi làm bài toán phức tạp:
+Để giải 1 bài toán thì ta cần chia nó ra thành các bài toán con độc lập và đào sâu giải từng bài toán con -> tất cả chỉ có v, nếu làm đc như v thì ta có thể cần hầu hết các bài toán đòi hỏi sự phức tạp
+
+VD: có 1 mảng struct, trong struct có char[] và int, yêu cầu tính tổng tất cả các int của char trùng nhau và so sánh char nào có tổng int lớn nhất thì in char có tổng int đó ra
+Lúc đầu thì tưởng là ghê gớm nhưng thực chất chỉ là nhiều bài toán con lồng nhau, ta tách ra là ok. Trước đây ta có cái tư duy là muốn so sánh 1 tập hợp gì thì nhét nó vào một mảng r so sánh các phần tử trong mảng (dù hơi ngu). Như v muốn so sánh tổng điểm các tên trùng nhau thì nhét tổng các int đó vào 1 mảng int (1 bài toán con, ta lại chia nhỏ tiếp), để tính tổng thì ta cần có mảng chỉ chứa các tên ko trùng nhau và mảng đó có cùng thứ tự y hệt mảng int.
+Bài toán 1: tạo ra một mảng chỉ có các tên không trùng nhau (bài toán này đã đơn giản hơn nhiều r). for các phần tử struct, for phát nữa từ đầu nếu không trùng tên thì lưu vào mảng char[i][100], trùng thì thôi ez
+Bài toán 2: tạo mảng int -> tạo mảng int i phần tử và for r thấy trùng tên thì int[]+=struct.int => ss lấy max r in là xong
+
+=> Thật ra như thế là giải đc mọi bài r, nhưng vấn đề là cần thay đổi tư duy một chút. Ta làm như v nó quá lâu và kém hiệu suất, do tư duy muốn so sánh cj thì nhét nó vào một mảng, hậu quả là bh ta so sánh int phải đi kèm với char nx nên phải tạo thêm 2 mảng int và char[][] => fix: trc khi nghĩ tạo mảng mới, ta hãy xem xem có thể tận dụng mảng cũ đc k.
+Ví dụ: ở bài toán trên, k xảy ra vấn đè j đòi hỏi các phần tử của struct phải ở nguyên vị trí, ta tận dụng nó luôn đỡ tạo mảng mới, chỉ cần sắp xếp mảng struct theo các char* đó là ez r.
+
+
